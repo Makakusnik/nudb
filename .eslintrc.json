@@ -3,9 +3,36 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort", "unused-imports"],
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   "rules": {
+    "prettier/prettier": "error",
+    "unused-imports/no-unused-imports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // Packages `react` related packages come first.
+          // Packages `next` related packages come second.
+          // Other packages come third.
+          [
+            "^react$",
+            "^(^next.*)",
+            "^(?!@types|@components|@hooks|@assets|@constants|@context|@lib|@theme)(^[@]?[^.].*)"
+          ],
+          // Types.
+          ["^@types(.*)"],
+          // Components
+          ["^(@components)(.*)"],
+          // Hooks + Contexts.
+          ["^(@context|@hooks)(.*)"],
+          // Utils, Constants, assets, lib, theme.
+          ["^(@assets)(.*)", "^(@lib)(.*)", "^(@theme)(.*)"],
+          // Parent imports.
+          ["^(\\.\\.)(.*)$", "^(\\./)(.*)$"]
+        ]
+      }
+    ],
     "@typescript-eslint/consistent-type-imports": "warn"
   }
 }
