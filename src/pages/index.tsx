@@ -69,6 +69,20 @@ const Home: NextPage = () => {
         <div className="mx-auto max-w-full rounded-lg ">
           <div className="px-4 text-center text-teal-400">
             <h1 className="font-poppins text-6xl">Food Database</h1>
+            <div className="flex">
+              <p className="tooltip-bottom mx-auto w-fit" data-tooltip="Test">
+                Bottom
+              </p>
+              <p className="tooltip-left mx-auto w-fit" data-tooltip="Test">
+                Left
+              </p>
+              <p className="tooltip-right mx-auto w-fit" data-tooltip="Test">
+                Right
+              </p>
+              <p className="tooltip-top mx-auto w-fit" data-tooltip="Test">
+                Top
+              </p>
+            </div>
           </div>
         </div>
       </header>
@@ -80,11 +94,14 @@ const Home: NextPage = () => {
           <table className="min-w-[48rem] max-w-full">
             <thead className="flex flex-row rounded-2xl px-0 pb-1 pt-2 lg:px-4 lg:pt-2">
               <tr className="flex w-full min-w-full flex-row bg-slate-100 lg:rounded-md ">
-                <th className="inline-flex w-fit items-center py-2 pl-4 text-left font-bold md:rounded-l-md">
-                  <input className="h-5 w-5" type="checkbox" />
+                <th
+                  data-tooltip="Kokotina velka pocivaiojsdoajsdoiaspdmpmsa"
+                  className="inline-flex w-fit items-center py-2 px-4 text-left font-bold md:rounded-l-md"
+                >
+                  <input disabled className="h-5 w-5 cursor-pointer disabled:cursor-not-allowed" type="checkbox" />
                 </th>
                 <th className="inline-flex min-w-[12rem] max-w-[12rem] md:min-w-[16rem] md:max-w-[16rem]">
-                  <div className="py-2 px-4 text-left font-bold">Name</div>
+                  <div className="py-2 text-left font-bold">Name</div>
                 </th>
                 <th className="mx-auto inline-flex min-w-[6rem] max-w-[6rem] justify-center py-2 px-4 font-bold">
                   energy
@@ -107,7 +124,7 @@ const Home: NextPage = () => {
               {data.map((item: ProductItem, index) => (
                 <TableRow key={index}>
                   <CheckboxTableCell>
-                    <input className="h-5 w-5" type="checkbox" />
+                    <input disabled className="h-5 w-5 cursor-pointer disabled:cursor-not-allowed" type="checkbox" />
                   </CheckboxTableCell>
                   <NameTableCell>{item.name}</NameTableCell>
                   <NutrientTableCell>{item.fats}</NutrientTableCell>
