@@ -4,6 +4,8 @@ import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
 
 import { useOutsideClick } from '@hooks/useOutsideClick';
 
+import { keyboardEventHandler } from '@lib/index';
+
 export const TableRow = ({ children }: ChildrenProps) => {
   const [isActive, setActive] = useState<boolean>(false);
   const [isFocused, setFocused] = useState<boolean>(false);
@@ -106,6 +108,15 @@ export const TableColumnHeadingSortable = ({
     <th
       tabIndex={0}
       onClick={handleClick}
+      onKeyDown={(e) =>
+        keyboardEventHandler(e, {
+          keys: [' ', 'a'],
+          handler(e) {
+            e?.preventDefault();
+            console.log('SPACE TY KOKOT');
+          },
+        })
+      }
       data-tooltip={dataTooltip}
       className={
         className ??
