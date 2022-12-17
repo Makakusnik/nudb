@@ -4,7 +4,9 @@
 
 @layer base {
   input:focus,
-  input:focus-visible {
+  input:focus-visible,
+  [tabindex]:focus,
+  [tabindex]:focus-visible {
     outline: none;
   }
 
@@ -68,13 +70,13 @@ body {
   color: var(--text-color);
   z-index: var(--z-index);
   position: absolute;
-  width: fit-content;
-  max-width: 12rem;
+  width: max-content;
+  max-width: 10rem;
   word-wrap: break-word;
-  padding: 1rem 1rem;
-  border-radius: 1rem;
+  padding: var(--pading);
+  border-radius: var(--border-radius);
   text-align: start;
-  background-color: rgba(0 0 0 / 0.3);
+  background-color: var(--background-color);
 }
 
 /* Before only */
@@ -104,10 +106,13 @@ body {
 .tooltip-bottom:before,
 .tooltip-bottom:after {
   --scale: 0;
-  --arrow-size: 10px;
-  --text-color: black;
+  --arrow-size: 0px;
+  --text-color: #115e59;
+  --background-color: rgba(204 251 241 / 0.95);
+  --border-radius: 0.5rem;
   --font-size: 0.75rem;
   --z-index: 150;
+  --pading: 0.5rem 1rem;
 
   position: absolute;
   z-index: var(--z-index);
@@ -151,23 +156,19 @@ body {
 
 .tooltip-top:before {
   --translate-y: calc(-1 * var(--arrow-size));
-  border-top-color: black;
   transform-origin: top center;
 }
 
 .tooltip-left:before {
   --translate-x: calc(-1 * var(--arrow-size));
-  border-left-color: black;
   transform-origin: center left;
 }
 .tooltip-right:before {
   --translate-x: calc(1 * var(--arrow-size));
-  border-right-color: black;
   transform-origin: center right;
 }
 .tooltip-bottom:before {
   --translate-y: calc(1 * var(--arrow-size));
-  border-bottom-color: black;
   transform-origin: bottom center;
 }
 
