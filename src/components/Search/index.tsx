@@ -17,7 +17,7 @@ const SearchBar = () => {
         } `}
       />
       <form
-        className={`mx-auto w-fit rounded-lg bg-white p-4 transition-transform duration-300 ${
+        className={`mx-auto max-w-xl rounded-lg bg-white p-4 transition-transform duration-300 ${
           isFocused ? 'scale-110' : ''
         }`}
         role="search"
@@ -33,7 +33,7 @@ const SearchBar = () => {
             onBlur={() => setFocus(false)}
             aria-label="Search for product"
             type="text"
-            className="h-12 rounded-lg border-transparent bg-transparent text-xl placeholder:opacity-50"
+            className="flex h-12 flex-1 rounded-lg border-transparent bg-transparent text-xl placeholder:opacity-50"
             placeholder="Search for product..."
             style={{ minWidth: '16ch', width: '12rem' }}
           />
