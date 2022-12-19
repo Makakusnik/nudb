@@ -1,14 +1,8 @@
 import { type NextPage } from 'next';
 import Head from 'next/head';
 
-import {
-  CheckboxTableCell,
-  NameTableCell,
-  NutrientTableCell,
-  TableColumnHeading,
-  TableColumnHeadingSortable,
-  TableRow,
-} from '@components/TableComponents';
+import { CheckboxTableCell, NameTableCell, NutrientTableCell, TableRow } from '@components/TableComponents';
+import { TableColumnHeading, TableColumnHeadingSortable } from '@components/TableComponents/header';
 
 import SearchBar from '../components/Search';
 
@@ -88,12 +82,12 @@ const Home: NextPage = () => {
       <main className="mx-auto w-full max-w-[100vw] px-0 lg:w-[90%] lg:min-w-[60rem]  xl:w-[90%] xl:min-w-[80rem] 2xl:w-[50%] 2xl:min-w-[87rem]">
         <div className="overflow-y-scroll bg-white lg:rounded-lg">
           <table className="min-w-fit max-w-full">
-            <thead className="flex flex-row rounded-2xl px-0 pb-2 pt-2 lg:px-4 lg:pt-2">
+            <thead className="flex flex-row rounded-2xl px-0 pb-2 pt-2 text-slate-600 lg:px-4 lg:pt-2">
               <tr className="flex w-full min-w-full flex-row bg-slate-100 lg:rounded-md ">
                 <TableColumnHeading dataTooltip="This feature is not yet available.">
                   <input disabled className="h-5 w-5 cursor-pointer disabled:cursor-not-allowed" type="checkbox" />
                 </TableColumnHeading>
-                <TableColumnHeadingSortable className="inline-flex min-w-[12rem] max-w-[12rem] items-center py-2 text-left font-bold transition-colors focus:text-teal-400 md:min-w-[16rem] md:max-w-[16rem]">
+                <TableColumnHeadingSortable className="inline-flex min-w-[12rem] max-w-[12rem] cursor-pointer items-center py-2 text-left font-bold transition-colors focus:text-teal-400 md:min-w-[16rem] md:max-w-[16rem]">
                   name
                 </TableColumnHeadingSortable>
                 <TableColumnHeadingSortable>energy</TableColumnHeadingSortable>

@@ -1,14 +1,15 @@
 import { useRef, useState } from 'react';
 import type { ChildrenProps } from '@type/index';
-import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
 
 import { useOutsideClick } from '@hooks/useOutsideClick';
-
-import { keyboardEventHandler } from '@lib/index';
 
 export const TableRow = ({ children }: ChildrenProps) => {
   const [isActive, setActive] = useState<boolean>(false);
   const [isFocused, setFocused] = useState<boolean>(false);
+  const [isHovering, setHovering] = useState<boolean>(false);
+  const hoveringStyle = '';
+  const focusedStyle = 'z-10 border-teal-500/50 text-teal-700 shadow-xl bg-teal-500/10 even:bg-teal-500/10';
+
   const ref = useRef(null);
 
   const handleOutsideClick = () => {
@@ -17,6 +18,19 @@ export const TableRow = ({ children }: ChildrenProps) => {
 
   const handleClick = () => {
     setActive(true);
+  };
+
+  const handleDoubleClick = () => {
+    // TODO otvori modal
+    console.log('YES TY KOKOT');
+  };
+
+  const handleHoverOn = () => {
+    setHovering(true);
+  };
+
+  const handleHoverOff = () => {
+    setHovering(false);
   };
 
   const handleFocused = () => {
@@ -33,14 +47,17 @@ export const TableRow = ({ children }: ChildrenProps) => {
     <tr
       ref={ref}
       onClick={handleClick}
+      onDoubleClick={handleDoubleClick}
       tabIndex={0}
       onFocus={handleFocused}
-      onMouseOver={handleFocused}
-      onMouseLeave={handleBlur}
+      onMouseOver={handleHoverOn}
+      onMouseLeave={handleHoverOff}
       onBlur={handleBlur}
-      className={`hover relative my-2 flex w-full min-w-fit flex-row border-2 border-indigo-700 py-1 transition-shadow first:mt-0 even:bg-slate-100 hover:z-10 lg:rounded-lg ${
-        isFocused ? 'ring-4 ring-teal-400/30' : ''
-      }`}
+      className={`h relative isolate my-2 flex w-full min-w-fit cursor-pointer flex-row border-2 border-solid border-transparent py-1 transition-all duration-300  first:mt-0 even:bg-slate-100 hover:border-teal-500/30 hover:text-teal-700  
+      focus:z-10 lg:rounded-lg
+      ${isHovering ? hoveringStyle : ''}
+      ${isFocused ? focusedStyle : ''} 
+      `}
     >
       {children}
     </tr>
@@ -53,7 +70,7 @@ export const NutrientTableCell = ({ children }: ChildrenProps) => {
       onClick={(e) => {
         e;
       }}
-      className="mx-auto inline-flex min-w-[6ch] max-w-[6ch] items-center justify-center py-2 md:min-w-[6ch] md:max-w-[6ch] "
+      className="mx-auto inline-flex min-w-[6ch] max-w-[6ch] items-center justify-center py-2 text-slate-500 md:min-w-[6ch] md:max-w-[6ch] "
     >
       {children}
     </td>
@@ -66,68 +83,4 @@ export const NameTableCell = ({ children }: ChildrenProps) => {
 
 export const CheckboxTableCell = ({ children }: ChildrenProps) => {
   return <td className="inline-flex items-center py-2 px-4">{children}</td>;
-};
-
-interface TableColumnHeadingProps {
-  dataTooltip?: string;
-  className?: string;
-}
-
-export const TableColumnHeading = ({ className, dataTooltip, children }: TableColumnHeadingProps & ChildrenProps) => {
-  return (
-    <th
-      data-tooltip={dataTooltip}
-      className={`tooltip-right inline-flex w-fit items-center py-2 px-4 text-left font-bold md:rounded-l-md ${className}`}
-    >
-      {children}
-    </th>
-  );
-};
-
-export const TableColumnHeadingSortable = ({
-  className,
-  dataTooltip,
-  children,
-}: TableColumnHeadingProps & ChildrenProps) => {
-  const [clickCount, setClickCount] = useState<number>(0);
-
-  const renderIcon = () => {
-    if (clickCount === 1) {
-      return <FaSortUp className={`ml-1 text-teal-400`} size="1rem" />;
-    } else if (clickCount === 2) {
-      return <FaSortDown className={`ml-1 text-teal-400`} size="1rem" />;
-    }
-    return <FaSort className={`ml-1`} size="1rem" />;
-  };
-
-  const handleClick = () => {
-    setClickCount((prevCount) => (prevCount + 1) % 3);
-  };
-
-  return (
-    <th
-      tabIndex={0}
-      onClick={handleClick}
-      onKeyDown={(e) =>
-        keyboardEventHandler(e, {
-          keys: [' ', 'a'],
-          handler(e) {
-            e?.preventDefault();
-            console.log('SPACE TY KOKOT');
-          },
-        })
-      }
-      data-tooltip={dataTooltip}
-      className={
-        className ??
-        `mx-auto inline-flex min-w-fit
-        max-w-fit items-center justify-center py-2 px-4 font-bold transition-colors focus:text-teal-400`
-      }
-    >
-      <>
-        {children}
-        {renderIcon()}
-      </>
-    </th>
-  );
 };
