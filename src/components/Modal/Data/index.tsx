@@ -16,8 +16,25 @@ export const AddFoodModal = () => {
           cannot be undone.
         </p>
 
-        <button onClick={() => setModalState(false)}>Deactivate</button>
-        <button onClick={() => setModalState(false)}>Cancel</button>
+        <button onClick={() => setModalState && setModalState(false)}>Deactivate</button>
+        <button onClick={() => setModalState && setModalState(false)}>Cancel</button>
+      </Dialog.Panel>
+    </div>
+  );
+};
+
+export const AddShitModal = () => {
+  const { setModalState } = useContext(ModalContext);
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black/30 p-4">
+      <Dialog.Panel className={'w-full max-w-sm rounded bg-white'}>
+        <Dialog.Title>Shit HOVNO</Dialog.Title>
+        <Dialog.Description>This dick this shcmikc</Dialog.Description>
+
+        <p>Are you sure you want to fuck youyrsefllflf</p>
+
+        <button onClick={() => setModalState && setModalState(false)}>Deactivate</button>
+        <button onClick={() => setModalState && setModalState(false)}>Cancel</button>
       </Dialog.Panel>
     </div>
   );

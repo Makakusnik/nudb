@@ -1,29 +1,50 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import type { ChildrenProps } from '@type/index';
+import type { ReactNode } from 'react';
 
 interface ModalContextProps {
   isModalOpen: boolean;
-  setModalState: (value: boolean) => void;
-  toggleModal: () => void;
+  ModalContent: ReactNode | null;
+  setModalState: ((value: boolean) => void) | null;
+  toggleModal: (() => void) | null;
+  setModalContent: ((component: ReactNode) => void) | null;
 }
 
 export const ModalContext = createContext<ModalContextProps>({
   isModalOpen: false,
-  setModalState: (value) => {
-    throw new Error('Not implemented');
-    return value;
-  },
-  toggleModal: () => {
-    throw new Error('Not implemented');
-  },
+  ModalContent: null,
+  setModalState: null,
+  toggleModal: null,
+  setModalContent: null,
 });
 
 export const ModalContextProvider = ({ children }: ChildrenProps) => {
-  const [isModalOpen, setModalState] = useState<boolean>(false);
+  const [isModalOpen, _setModalState] = useState<boolean>(false);
+  const [ModalContent, _setModalContent] = useState<ReactNode>();
 
   const toggleModal = () => {
-    setModalState((prevState) => !prevState);
+    _setModalState((prevState) => !prevState);
   };
 
-  return <ModalContext.Provider value={{ isModalOpen, setModalState, toggleModal }}>{children}</ModalContext.Provider>;
+  const setModalState = (value: boolean) => {
+    _setModalState && _setModalState(value);
+  };
+
+  const setModalContent = (value: ReactNode) => {
+    _setModalContent && _setModalContent(value);
+  };
+
+  return (
+    <ModalContext.Provider
+      value={{
+        ModalContent,
+        isModalOpen,
+        setModalContent,
+        setModalState,
+        toggleModal,
+      }}
+    >
+      {children}
+    </ModalContext.Provider>
+  );
 };
