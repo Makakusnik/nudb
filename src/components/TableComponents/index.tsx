@@ -53,11 +53,10 @@ export const TableRow = ({ children }: ChildrenProps) => {
       onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
       onBlur={handleBlur}
-      className={`h relative isolate my-2 flex w-full min-w-fit cursor-pointer flex-row border-2 border-solid border-transparent py-1 transition-all duration-300  first:mt-0 even:bg-slate-100 hover:border-teal-500/30 hover:text-teal-700  
-      focus:z-10 lg:rounded-lg
-      ${isHovering ? hoveringStyle : ''}
-      ${isFocused ? focusedStyle : ''} 
-      `}
+      className={`relative isolate my-2 flex w-full min-w-fit cursor-pointer flex-row border-2 border-solid border-transparent py-1 transition-all duration-300  first:mt-0   hover:text-teal-700  
+      focus:z-10 lg:rounded-lg ${isHovering ? hoveringStyle : ''} ${
+        isFocused ? focusedStyle : 'even:bg-slate-100 hover:border-teal-500/30'
+      }`}
     >
       {children}
     </tr>
