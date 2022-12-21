@@ -6,7 +6,7 @@ import { ModalContextProvider } from '@context/ModalContext';
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ModalContextProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </ModalContextProvider>
   );
 };
