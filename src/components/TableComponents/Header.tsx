@@ -44,16 +44,13 @@ export const TableColumnHeadingSortable = ({
     <th
       tabIndex={0}
       onClick={handleInteraction}
-      onKeyDown={(e) =>
-        keyboardEventHandler(e, {
-          keys: [' ', 'Enter'],
-          handler(e) {
-            e?.preventDefault();
-            handleInteraction();
-            console.log('SPACE TY KOKOT');
-          },
-        })
-      }
+      onKeyDown={keyboardEventHandler({
+        keys: [' ', 'Enter'],
+        handler(e) {
+          e?.preventDefault();
+          handleInteraction();
+        },
+      })}
       data-tooltip={dataTooltip}
       className={
         className ??
