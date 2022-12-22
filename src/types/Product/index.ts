@@ -6,8 +6,8 @@ export interface Product {
   energy: number;
   fats: number;
   saturatedFats: number;
-  unsaturatedMonoFats: number;
-  unsaturatedPolyFats: number;
+  monoUnsaturatedFats: number;
+  polyUnsaturatedFats: number;
   proteins: number;
   carbohydrates: number;
   sugar: number;
