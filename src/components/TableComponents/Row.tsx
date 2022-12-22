@@ -6,8 +6,6 @@ import { FoodDetailModal } from '@components/Modal/Data';
 import { ModalContext } from '@context/ModalContext';
 import { useOutsideClick } from '@hooks/useOutsideClick';
 
-import { keyboardEventHandler } from '@lib/index';
-
 import { CheckboxTableCell, NameTableCell, NutrientTableCell } from './Cells';
 
 interface TableRowProps {
@@ -25,16 +23,15 @@ export const TableRow = ({ data }: TableRowProps) => {
     setActive(false);
   };
 
-  const handleCloseModal = () => {
-    console.log('closing');
+  const onClose = () => {
     setActive(false);
   };
 
   const handleClick = () => {
     setActive(true);
-    setCloseHandler && setCloseHandler(() => handleCloseModal);
-    setModalContent && setModalContent(<FoodDetailModal product={data} />);
-    setModalState && setModalState(true);
+    setCloseHandler(() => onClose());
+    setModalContent(<FoodDetailModal product={data} />);
+    setModalState(true);
   };
 
   const handleFocused = () => {
@@ -52,7 +49,6 @@ export const TableRow = ({ data }: TableRowProps) => {
       ref={ref}
       onClick={handleClick}
       tabIndex={0}
-      onKeyDown={keyboardEventHandler({ keys: 'Enter', handler: handleClick })}
       onFocus={handleFocused}
       onBlur={handleBlur}
       className={`relative isolate my-2 flex w-full min-w-fit cursor-pointer flex-row border-2 border-solid border-transparent py-1 transition-all duration-300  first:mt-0   even:bg-slate-100  
