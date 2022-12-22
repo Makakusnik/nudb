@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { Dialog } from '@headlessui/react';
 import type { Product } from '@type/Product';
 
+import { AddInputButton } from '@components/Buttons';
+
 import { ModalContext } from '@context/ModalContext';
 
 export const DefaultModal = () => {
@@ -101,7 +103,7 @@ export const FoodDetailModal = ({ product }: FoodDetailProps) => {
         <span className="ml-1 text-base font-normal">{product.brand}</span>
       </Dialog.Title>
       <Dialog.Description className="mt-4 flex" as="div">
-        <div className="flex justify-between">
+        <div className="flex w-full justify-between">
           <div className="tooltip-top flex w-full flex-col bg-slate-500" data-tooltip="This feature is in development">
             <h3 className="text-xl font-normal">Prices</h3>
             <div className="flex"></div>
@@ -114,8 +116,9 @@ export const FoodDetailModal = ({ product }: FoodDetailProps) => {
           </div>
         </div>
       </Dialog.Description>
-      <button onClick={() => setModalState && setModalState(false)}>Deactivate</button>
-      <button onClick={() => setModalState && setModalState(false)}>Cancel</button>
+      <div className="mt-4 flex w-full justify-end">
+        <AddInputButton>Add Food</AddInputButton>
+      </div>
     </Dialog.Panel>
   );
 };
