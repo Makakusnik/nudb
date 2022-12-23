@@ -3,11 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  button:focus,
+  button:focus-visible {
+    outline: none;
+  }
+
   input:focus,
   input:focus-visible,
   [tabindex]:focus,
   [tabindex]:focus-visible {
     outline: none;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
   }
 
   table,
