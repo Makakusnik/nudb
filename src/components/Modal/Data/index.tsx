@@ -95,7 +95,6 @@ const NutritionTable = ({ data }: { data: Product }) => {
 };
 
 export const FoodDetailModal = ({ product }: FoodDetailProps) => {
-  const { setModalState } = useContext(ModalContext);
   return (
     <Dialog.Panel className={'w-full max-w-2xl rounded-md bg-white p-6'}>
       <Dialog.Title className={'text-2xl font-medium'}>
