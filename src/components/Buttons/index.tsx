@@ -1,1 +1,1 @@
-export { AddInputButton } from './ModalActionButtons';
+export { AddInputButton } from './InputButton';
