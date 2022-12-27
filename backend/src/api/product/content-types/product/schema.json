@@ -1,0 +1,92 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "Brand": {
+      "type": "string",
+      "required": true
+    },
+    "Description": {
+      "type": "text",
+      "maxLength": 1400
+    },
+    "energy": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "fats": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "max": 100,
+      "default": 0
+    },
+    "saturatedFats": {
+      "type": "decimal",
+      "required": false,
+      "default": 0,
+      "max": 100,
+      "min": 0
+    },
+    "monoUnsaturatedFats": {
+      "type": "decimal",
+      "max": 100,
+      "min": 0,
+      "default": 0
+    },
+    "polyUnsaturatedFats": {
+      "type": "decimal",
+      "max": 100,
+      "min": 0,
+      "default": 0
+    },
+    "carbohydrates": {
+      "type": "decimal",
+      "max": 100,
+      "min": 0,
+      "required": true,
+      "default": 0
+    },
+    "sugar": {
+      "type": "decimal",
+      "max": 100,
+      "min": 0,
+      "default": 0
+    },
+    "fiber": {
+      "type": "decimal",
+      "default": 0,
+      "max": 100,
+      "min": 0
+    },
+    "proteins": {
+      "type": "decimal",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "required": true
+    },
+    "salt": {
+      "type": "decimal",
+      "max": 100,
+      "required": true,
+      "min": 0,
+      "default": 0
+    }
+  }
+}
