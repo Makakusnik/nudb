@@ -24,12 +24,7 @@ export const AddInputButton = ({ children }: ChildrenProps) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('before');
-    console.log(e.currentTarget['grams'].value);
     e.currentTarget.reset();
-    console.log('after');
-    console.log(e.currentTarget['grams'].value);
-
     setInputState(false);
   };
 
@@ -54,7 +49,6 @@ export const AddInputButton = ({ children }: ChildrenProps) => {
           />
         </span>
         <button
-          disabled={true}
           type={'button'}
           data-tooltip="This feature is not available"
           className={`tooltip-top z-10 flex w-fit items-center rounded-r-md bg-green-300 p-2 px-3 text-green-600 transition-all focus:ring-4 focus:ring-inset focus:ring-teal-400/60 disabled:bg-slate-300 disabled:text-slate-600  ${
