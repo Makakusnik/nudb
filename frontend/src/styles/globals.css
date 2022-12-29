@@ -126,7 +126,7 @@ body {
   --font-size: 0.75rem;
   --z-index: 150;
   --pading: 0.5rem 1rem;
-
+  font-weight: 500;
   position: absolute;
   z-index: var(--z-index);
   transition: 300ms transform;
@@ -136,6 +136,7 @@ body {
 .tooltip-top:after {
   --translate-y: calc(-100% - var(--arrow-size));
   left: 50%;
+  top: -25%;
   transform: translateY(var(--translate-y, 0)) translateX(-50%) scale(var(--scale));
   transform-origin: bottom center;
 }
@@ -162,7 +163,7 @@ body {
 .tooltip-bottom:after {
   --translate-y: calc(100% + var(--arrow-size));
   left: 50%;
-  bottom: 0;
+  bottom: -25%;
   transform-origin: top center;
   transform: translateY(var(--translate-y, 0)) translateX(-50%) scale(var(--scale));
 }

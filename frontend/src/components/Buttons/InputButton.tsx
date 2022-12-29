@@ -9,8 +9,8 @@ export const AddInputButton = ({ children }: ChildrenProps) => {
 
   const handleClick = (e: FormEvent<HTMLButtonElement>) => {
     if (isInputState) {
-      e.currentTarget.form?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
       if (e.currentTarget.form?.reportValidity()) {
+        e.currentTarget.form?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
         setInputState(false);
       }
     } else {
@@ -50,9 +50,10 @@ export const AddInputButton = ({ children }: ChildrenProps) => {
         </span>
         <button
           type={'button'}
-          data-tooltip="This feature is not available"
-          className={`tooltip-top z-10 flex w-fit items-center rounded-r-md bg-green-300 p-2 px-3 text-green-600 transition-all focus:ring-4 focus:ring-inset focus:ring-teal-400/60 disabled:bg-slate-300 disabled:text-slate-600  ${
-            isInputState ? 'bg-yellow-300 text-yellow-600' : 'rounded-l-md'
+          className={`z-10 flex w-fit items-center rounded-r-md bg-green-300 p-2 px-3 text-green-600 transition-all duration-300  focus:ring-4 focus:ring-inset focus:ring-teal-400/60 disabled:bg-slate-300 disabled:text-slate-600  ${
+            isInputState
+              ? 'bg-yellow-300 text-yellow-600 hover:bg-yellow-200 hover:text-yellow-500'
+              : 'rounded-l-md hover:bg-green-200 hover:text-green-500'
           }`}
           onClick={handleClick}
         >
