@@ -9,7 +9,7 @@
       "@config/*": ["src/config/*"],
       "@hooks/*": ["src/hooks/*"],
       "@lib/*": ["src/lib/*"],
-      "@theme/*": ["src/theme/*"],
+      "@styles/*": ["src/styles/*"],
       "@type/*": ["src/types/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
