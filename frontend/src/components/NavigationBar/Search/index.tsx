@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { TbListSearch } from 'react-icons/tb';
 
-const SearchBar = () => {
+export const SearchBar = () => {
   const [isFocused, setFocus] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent) => {
@@ -46,5 +46,3 @@ const SearchBar = () => {
     </>
   );
 };
-
-export default SearchBar;
