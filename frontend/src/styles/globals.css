@@ -10,6 +10,8 @@
 
   input:focus,
   input:focus-visible,
+  textarea:focus,
+  textarea:focus-visible,
   [tabindex]:focus,
   [tabindex]:focus-visible {
     outline: none;
