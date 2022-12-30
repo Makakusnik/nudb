@@ -1,8 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Dialog } from '@headlessui/react';
+import type { ChildrenProps } from '@type/index';
 import type { Product } from '@type/Product';
+import { AddSymbol, CloseSymbol } from 'src/Assets/icons';
 
 import { AddInputButton } from '@components/Buttons';
+import { IconButton, IconTextButton } from '@components/Buttons/IconButton';
+import { FormRow } from '@components/Form';
+import { FormInput, FormTextArea } from '@components/Input';
+import { NutritionTable } from '@components/NutritionalTable';
 
 import { ModalContext } from '@context/ModalContext';
 
@@ -10,10 +16,69 @@ export const DefaultModal = () => {
   const { setModalState } = useContext(ModalContext);
   return (
     <Dialog.Panel className={'w-full max-w-sm rounded bg-white'}>
-      <Dialog.Title>Unknown modal</Dialog.Title>
+      <DialogTopBar>Unknown</DialogTopBar>
       <Dialog.Description>This modal is default for unhandled modal content.</Dialog.Description>
       <p>Please provide proper modal content data.</p>
       <button onClick={() => setModalState && setModalState(false)}>Cancel</button>
+    </Dialog.Panel>
+  );
+};
+interface DialogTitleProps {
+  onClose?: () => void;
+}
+
+const DialogTopBar = ({ children, onClose }: DialogTitleProps & ChildrenProps) => {
+  const { setModalState } = useContext(ModalContext);
+
+  const handleClose = () => {
+    onClose && onClose();
+    setModalState(false);
+  };
+  return (
+    <Dialog.Title className={'flex justify-between text-2xl font-medium'}>
+      {children}
+      <IconButton onClick={handleClose} icon={CloseSymbol} colorType="transparent"></IconButton>
+    </Dialog.Title>
+  );
+};
+
+export const AddProductModal = () => {
+  const [isFocused, setFocused] = useState<boolean>(false);
+
+  const handleFocus = () => {
+    setFocused(true);
+  };
+
+  const handleBlur = () => {
+    setFocused(false);
+  };
+
+  return (
+    <Dialog.Panel className={'w-full max-w-2xl rounded-md bg-white p-6'}>
+      <DialogTopBar>Add Product</DialogTopBar>
+      <Dialog.Description className="mt-4 flex" as="div">
+        <form className="flex flex-col gap-y-4">
+          <FormRow>
+            <FormInput
+              id="productName"
+              name="ProductName"
+              label="Product Name:"
+              placeholder=""
+              type="text"
+              autoComplete="false"
+            />
+          </FormRow>
+          <FormRow>
+            <FormInput id="brandName" name="BrandName" label="Brand Name:" placeholder="" type="text" />
+          </FormRow>
+          <FormRow>
+            <FormTextArea id="description" name="Description" label="Description:" placeholder="" type="text" />
+          </FormRow>
+        </form>
+      </Dialog.Description>
+      <div className="mt-4 flex w-full justify-end">
+        <IconTextButton icon={AddSymbol}>Add Food</IconTextButton>
+      </div>
     </Dialog.Panel>
   );
 };
@@ -21,86 +86,15 @@ export const DefaultModal = () => {
 interface FoodDetailProps {
   product: Product;
 }
-
-const NutritionTable = ({ data }: { data: Product }) => {
-  return (
-    <div className="flex min-w-full">
-      <table className="flex w-full flex-col">
-        <caption className="hidden">Nutritional Values for {data.name}</caption>
-        <tbody className="w-full">
-          <tr className="flex w-full justify-between py-1 ">
-            <th className="font-medium" scope="row">
-              Fats
-            </th>
-            <td>{data.fats ?? 0} g</td>
-          </tr>
-          {data.saturatedFats && (
-            <tr className="flex w-full justify-between ">
-              <th className="ml-4" scope="row">
-                <abbr title="Saturated Fatty Acids">SFA</abbr>
-              </th>
-              <td>{data.saturatedFats ?? 0} g</td>
-            </tr>
-          )}
-          {data.monoUnsaturatedFats && (
-            <tr className="flex w-full justify-between ">
-              <th className="ml-4" scope="row">
-                <abbr title="Mono Unsaturated Fatty Acids">MUFA</abbr>
-              </th>
-              <td>{data.monoUnsaturatedFats ?? 0} g</td>
-            </tr>
-          )}
-          {data.polyUnsaturatedFats && (
-            <tr className="flex w-full justify-between ">
-              <th className="ml-4" scope="row">
-                <abbr title="Poly Unsaturated Fatty Acids">PUFA</abbr>
-              </th>
-              <td>{data.polyUnsaturatedFats ?? 0} g</td>
-            </tr>
-          )}
-          <tr className="flex w-full justify-between ">
-            <th className="font-medium" scope="row">
-              Carbohydrates
-            </th>
-            <td>{data.carbohydrates ?? 0} g</td>
-          </tr>
-          <tr className="flex w-full justify-between ">
-            <th className="ml-4 " scope="row">
-              Sugar
-            </th>
-            <td>{data.sugar ?? 0} g</td>
-          </tr>
-          <tr className="flex w-full justify-between ">
-            <th className="ml-4 " scope="row">
-              Fiber
-            </th>
-            <td>{data.fiber ?? 0} g</td>
-          </tr>
-          <tr className="flex w-full justify-between ">
-            <th className="font-medium" scope="row">
-              Proteins
-            </th>
-            <td>{data.proteins ?? 0} g</td>
-          </tr>
-          <tr className="flex w-full justify-between ">
-            <th className="font-medium" scope="row">
-              Salt
-            </th>
-            <td>{data.salt ?? 0} g</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
 export const FoodDetailModal = ({ product }: FoodDetailProps) => {
   return (
     <Dialog.Panel className={'w-full max-w-2xl rounded-md bg-white p-6'}>
-      <Dialog.Title className={'text-2xl font-medium'}>
-        {product.name}
-        <span className="ml-1 text-base font-normal">{product.brand}</span>
-      </Dialog.Title>
+      <DialogTopBar>
+        <span>
+          {product.name}
+          <span className="ml-1 text-base font-normal">{product.brand}</span>
+        </span>
+      </DialogTopBar>
       <Dialog.Description className="mt-4 flex" as="div">
         <div className="flex w-full justify-between">
           <div className="tooltip-top flex w-full flex-col bg-slate-500" data-tooltip="This feature is in development">
@@ -118,21 +112,6 @@ export const FoodDetailModal = ({ product }: FoodDetailProps) => {
       <div className="mt-4 flex w-full justify-end">
         <AddInputButton>Add Food</AddInputButton>
       </div>
-    </Dialog.Panel>
-  );
-};
-
-export const AddShitModal = () => {
-  const { setModalState } = useContext(ModalContext);
-  return (
-    <Dialog.Panel className={'w-full max-w-sm rounded bg-white'}>
-      <Dialog.Title>Shit HOVNO</Dialog.Title>
-      <Dialog.Description>This dick this shcmikc</Dialog.Description>
-
-      <p>Are you sure you want to fuck youyrsefllflf</p>
-
-      <button onClick={() => setModalState && setModalState(false)}>Deactivate</button>
-      <button onClick={() => setModalState && setModalState(false)}>Cancel</button>
     </Dialog.Panel>
   );
 };
