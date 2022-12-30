@@ -1,13 +1,28 @@
+import { useContext } from 'react';
 import { type NextPage } from 'next';
 import Head from 'next/head';
+import { AddSymbol, WarningSymbol } from 'src/Assets/icons';
 
+import { IconButton } from '@components/Buttons/IconButton';
 import { Header } from '@components/Header';
 import { Main } from '@components/Main';
 import { Modal } from '@components/Modal';
+import { AddProductModal } from '@components/Modal/Data';
 import { NavigationBar } from '@components/NavigationBar';
 import { Table } from '@components/TableComponents';
 
+import { ModalContext } from '@context/ModalContext';
+
 const Home: NextPage = () => {
+  const { setModalContent, setModalState } = useContext(ModalContext);
+
+  const handleClick = () => {
+    console.log('yeah');
+
+    setModalContent(<AddProductModal />);
+    setModalState(true);
+  };
+
   return (
     <>
       <Modal />
@@ -19,7 +34,16 @@ const Home: NextPage = () => {
       <Header />
       <NavigationBar />
       <Main>
-        <button>Klik me kkt</button>
+        <div className="flex justify-end gap-x-2 py-4 px-2 sm:px-6 lg:px-0">
+          <IconButton
+            onClick={handleClick}
+            colorType="green"
+            icon={AddSymbol}
+            tooltip={'Add product to database'}
+            tooltipPosition="top"
+          />
+          <IconButton colorType="yellow" icon={WarningSymbol} />
+        </div>
         <div className="overflow-y-scroll bg-white lg:rounded-lg">
           <Table />
         </div>
