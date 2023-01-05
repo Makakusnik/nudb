@@ -1,83 +1,38 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef } from 'react';
 import type { WidthFraction } from '@type/Styles';
-import type { HTMLInputTypeAttribute, Ref } from 'react';
+import type { Ref } from 'react';
 
 import type { NativeInputProps } from '../BaseInput';
+import { FormInputWithLabel } from './FormInput';
 
 type FormInputProps = {
   label: string;
   id: string;
-  name: string;
   width?: WidthFraction;
-  placeholder?: string;
-  type: HTMLInputTypeAttribute;
   classLabel?: string;
   classInput?: string;
-  isInvalid?: boolean;
   errors?: string;
 } & NativeInputProps;
 forwardRef;
 
 // TODO Sprav addony na input (left, right) errory taktiez.
 // TODO Ak je required tak musi mat cervenu hviezdicku
-// TODO Pridaj pattern matching
-// TODO Pridaj volitelny native validation
-// TODO Vycucni base input do vlastnej classy, tu ich len nastyluj accordingly (horziont vertical)
 
 export const VerticalInput = forwardRef(function FormInput(
-  {
-    label,
-    name,
-    id,
-    placeholder,
-    type,
-    width = 'w-full',
-    classInput,
-    classLabel,
-    isInvalid,
-    errors,
-    ...other
-  }: FormInputProps,
+  { width, errors, ...props }: FormInputProps,
   ref: Ref<HTMLInputElement>,
 ) {
-  const [isFocused, setFocused] = useState<boolean>(false);
-
-  const handleFocus = () => {
-    setFocused(true);
-  };
-  const handleBlur = () => {
-    setFocused(false);
-  };
   return (
-    <div className="flex flex-col">
-      <label className={classLabel} htmlFor={id}>
-        {label}
-      </label>
-      <div
-        className={`flex items-center rounded-lg bg-slate-100 p-1 ring-4 ring-inset transition-shadow ${width} ${
-          isFocused ? 'ring-teal-400' : 'ring-transparent'
-        }
-         ${isInvalid ? 'ring-red-500' : ''}
-        `}
-      >
-        <input
-          className={`w-full rounded-lg bg-white p-1 ${classInput || ''}`}
-          {...other}
-          onFocus={(e) => {
-            handleFocus();
-            other.onFocus && other.onFocus(e);
-          }}
-          onBlur={(e) => {
-            handleBlur();
-            other.onBlur && other.onBlur(e);
-          }}
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          name={name}
-        />
-      </div>
-      <p>{isInvalid ? errors : null}</p>
+    <div className="flex w-full flex-col justify-between gap-y-2">
+      <FormInputWithLabel
+        classInput={`m-1 flex items-center self-end rounded-lg p-1 
+          ring-4 ring-slate-100 transition-shadow invalid:ring-red-200 focus:ring-teal-400 focus:invalid:ring-red-400 ${
+            width ? width : 'w-full'
+          }`}
+        {...props}
+        inputRef={ref}
+      />
+      {errors ? <em className="mt-1 mb-2 text-xs font-medium not-italic text-red-500">{errors}</em> : null}
     </div>
   );
 });

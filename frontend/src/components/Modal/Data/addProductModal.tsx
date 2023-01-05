@@ -70,7 +70,6 @@ export const AddProductModal = () => {
                 label={`${addProductFields.name.labelName}:`}
                 type="text"
                 autoComplete="false"
-                isInvalid={Object.hasOwn(errors, addProductFields.name.fieldName)}
                 errors={errors[addProductFields.name.fieldName]?.message}
                 {...register(addProductFields.name.fieldName)}
               />
@@ -78,7 +77,6 @@ export const AddProductModal = () => {
             <FormColumn width="w-1/2">
               <VerticalInput
                 id={addProductFields.brand.fieldName}
-                isInvalid={Object.hasOwn(errors, addProductFields.brand.fieldName)}
                 errors={errors[addProductFields.brand.fieldName]?.message}
                 label={`${addProductFields.brand.labelName}:`}
                 type="text"
@@ -90,7 +88,6 @@ export const AddProductModal = () => {
             <FormColumn>
               <FormTextArea
                 id={addProductFields.description.fieldName}
-                isInvalid={Object.hasOwn(errors, addProductFields.description.fieldName)}
                 errors={errors[addProductFields.description.fieldName]?.message}
                 label={`${addProductFields.description.labelName}:`}
                 {...register(addProductFields.description.fieldName)}
@@ -117,7 +114,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="flex items-center"
                       id={addProductFields.fats.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.fats.fieldName)}
                       errors={errors[addProductFields.fats.fieldName]?.message}
                       label={`${addProductFields.fats.labelName}:`}
                       type="numeric"
@@ -131,7 +127,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="flex items-center"
                       id={addProductFields.proteins.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.proteins.fieldName)}
                       errors={errors[addProductFields.proteins.fieldName]?.message}
                       label={`${addProductFields.proteins.labelName}:`}
                       type="numeric"
@@ -148,7 +143,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="pl-4 flex items-center"
                       id={addProductFields.saturatedFats.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.saturatedFats.fieldName)}
                       errors={errors[addProductFields.saturatedFats.fieldName]?.message}
                       label={<abbr title="Saturated Fatty Acids">{addProductFields.saturatedFats.labelName}:</abbr>}
                       type="numeric"
@@ -162,7 +156,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="flex items-center"
                       id={addProductFields.carbohydrates.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.carbohydrates.fieldName)}
                       errors={errors[addProductFields.carbohydrates.fieldName]?.message}
                       label={`${addProductFields.carbohydrates.labelName}:`}
                       type="numeric"
@@ -179,7 +172,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="pl-4 flex items-center"
                       id={addProductFields.monoUnsaturatedFats.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.monoUnsaturatedFats.fieldName)}
                       errors={errors[addProductFields.monoUnsaturatedFats.fieldName]?.message}
                       label={
                         <abbr title="Mono Unsaturated Fatty Acids">
@@ -197,7 +189,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="pl-4 flex items-center"
                       id={addProductFields.sugar.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.sugar.fieldName)}
                       errors={errors[addProductFields.sugar.fieldName]?.message}
                       label={`${addProductFields.sugar.labelName}:`}
                       type="numeric"
@@ -214,7 +205,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="pl-4 flex items-center"
                       id={addProductFields.polyUnsaturatedFats.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.polyUnsaturatedFats.fieldName)}
                       errors={errors[addProductFields.polyUnsaturatedFats.fieldName]?.message}
                       label={`${addProductFields.polyUnsaturatedFats.labelName}:`}
                       type="numeric"
@@ -228,7 +218,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="pl-4 flex items-center"
                       id={addProductFields.fiber.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.fiber.fieldName)}
                       errors={errors[addProductFields.fiber.fieldName]?.message}
                       label={`${addProductFields.fiber.labelName}:`}
                       type="numeric"
@@ -245,7 +234,6 @@ export const AddProductModal = () => {
                       width="w-1/2"
                       classLabel="flex items-center"
                       id={addProductFields.salt.fieldName}
-                      isInvalid={Object.hasOwn(errors, addProductFields.salt.fieldName)}
                       errors={errors[addProductFields.salt.fieldName]?.message}
                       label={`${addProductFields.salt.labelName}:`}
                       type="numeric"
