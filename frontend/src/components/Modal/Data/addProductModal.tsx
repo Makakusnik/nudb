@@ -40,12 +40,18 @@ export const AddProductModal = () => {
     defaultValues: AddProductModalDefaults,
     shouldFocusError: true,
     resolver: zodResolver(addProductSchema),
+    shouldUnregister: true,
+    shouldUseNativeValidation: true,
   });
 
   const clickHandler = () => {
     handleSubmit(
-      (data) => console.log('Data: ', data),
-      (errors) => console.log('Errors: ', errors),
+      (data) => {
+        console.log('Data: ', data);
+      },
+      (errors) => {
+        console.log('Errors: ', errors);
+      },
     )();
   };
 
@@ -56,7 +62,7 @@ export const AddProductModal = () => {
         {
           // TODO poriadne sprav submitovanie
         }
-        <form className="flex w-full flex-col flex-wrap gap-y-4">
+        <form className="flex w-full flex-col flex-wrap gap-y-4" noValidate>
           <FormRow>
             <FormColumn width="w-1/2">
               <VerticalInput

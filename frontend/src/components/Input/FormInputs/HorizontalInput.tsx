@@ -43,35 +43,30 @@ export const HorizontalInput = forwardRef(function FormInput(
     setFocused(false);
   };
   return (
-    <div className="flex">
+    <div className="flex items-center">
       <label className={classLabel} htmlFor={id}>
         {label}
       </label>
-      <div
-        className={`flex items-center rounded-lg bg-slate-100 p-1 ring-4 ring-inset transition-shadow ${width} ${
-          isFocused ? 'ring-teal-400' : 'ring-transparent'
-        }
-         ${isInvalid ? 'ring-red-500' : ''}
-        `}
-      >
-        <input
-          ref={ref}
-          className={`w-full rounded-lg bg-white p-1 ${classInput || ''}`}
-          {...other}
-          onFocus={(e) => {
-            handleFocus();
-            other.onFocus && other.onFocus(e);
-          }}
-          onBlur={(e) => {
-            handleBlur();
-            other.onBlur && other.onBlur(e);
-          }}
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          name={name}
-        />
-      </div>
+      <input
+        ref={ref}
+        className={`h-fit w-full rounded-lg bg-white p-2 ring-4 ring-inset ring-slate-100 transition-shadow valid:ring-teal-200 invalid:ring-red-200 focus:ring-teal-400 focus:invalid:ring-red-400`}
+        {...other}
+        onInvalid={(e) => {
+          e.preventDefault();
+        }}
+        onFocus={(e) => {
+          handleFocus();
+          other.onFocus && other.onFocus(e);
+        }}
+        onBlur={(e) => {
+          handleBlur();
+          other.onBlur && other.onBlur(e);
+        }}
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        name={name}
+      />
       <p className="text-xs">{isInvalid ? errors : null}</p>
     </div>
   );
