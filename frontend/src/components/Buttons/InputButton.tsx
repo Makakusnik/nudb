@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ChildrenProps } from '@type/index';
 import type { FormEvent } from 'react';
-import { AddSymbol } from 'src/Assets/icons';
+
+import { AddSymbol } from '@assets/icons';
 
 export const AddInputButton = ({ children }: ChildrenProps) => {
   const [isInputState, setInputState] = useState<boolean>(false);
