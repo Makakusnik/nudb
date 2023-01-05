@@ -2,7 +2,7 @@ import { disabledStyle } from '@styles/shared';
 import type { ChildrenProps } from '@type/index';
 import type { ColorType, Position } from '@type/Styles';
 import type { Dependant } from '@type/utlityTypes';
-import type { MouseEvent } from 'react';
+import type { ButtonHTMLAttributes, DetailedHTMLProps, MouseEvent } from 'react';
 import type { IconType } from 'react-icons';
 import { BsQuestion } from 'react-icons/bs';
 
@@ -10,7 +10,7 @@ import { getColorClasses, getFocusClasses, getTooltipPosition } from '@lib/utili
 
 const ButtonIconBaseClasses = 'flex h-fit w-fit items-center rounded-md p-2 transition-all duration-300';
 
-interface IconButtonPropsBase {
+interface IconButtonPropsBase extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   icon: IconType;
   onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
   colorType?: ColorType;
@@ -28,6 +28,7 @@ export const IconButton = ({
   tooltip,
   tooltipPosition,
   iconSize = 20,
+  ...other
 }: IconButtonProps) => {
   const Icon = icon;
   const focusClass = getFocusClasses(colorType);
@@ -39,6 +40,7 @@ export const IconButton = ({
       type={'button'}
       data-tooltip={tooltip}
       className={`${ButtonIconBaseClasses} ${focusClass} ${colorClass} ${disabledStyle} ${tooltipClass}`}
+      {...other}
     >
       {Icon ? <Icon size={iconSize} /> : <BsQuestion size={iconSize} />}
     </button>

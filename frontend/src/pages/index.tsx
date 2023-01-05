@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { type NextPage } from 'next';
 import Head from 'next/head';
-import { AddSymbol, WarningSymbol } from 'src/Assets/icons';
 
 import { IconButton } from '@components/Buttons/IconButton';
 import { Header } from '@components/Header';
@@ -12,6 +11,8 @@ import { NavigationBar } from '@components/NavigationBar';
 import { Table } from '@components/TableComponents';
 
 import { ModalContext } from '@context/ModalContext';
+
+import { AddSymbol, WarningSymbol } from '@assets/icons';
 
 const Home: NextPage = () => {
   const { setModalContent, setModalState } = useContext(ModalContext);
