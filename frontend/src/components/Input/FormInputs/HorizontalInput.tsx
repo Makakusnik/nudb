@@ -13,11 +13,25 @@ type FormInputProps = {
   type: HTMLInputTypeAttribute;
   classLabel?: string;
   classInput?: string;
+  isInvalid?: boolean;
+  errors?: string;
 } & InputProps;
 forwardRef;
 
-export const FormInput = forwardRef(function FormInput(
-  { label, name, id, placeholder, type, width = 'w-full', classInput, classLabel, ...other }: FormInputProps,
+export const HorizontalInput = forwardRef(function FormInput(
+  {
+    label,
+    name,
+    id,
+    placeholder,
+    type,
+    width = 'w-full',
+    classInput,
+    classLabel,
+    isInvalid,
+    errors,
+    ...other
+  }: FormInputProps,
   ref: Ref<HTMLInputElement>,
 ) {
   const [isFocused, setFocused] = useState<boolean>(false);
@@ -29,14 +43,16 @@ export const FormInput = forwardRef(function FormInput(
     setFocused(false);
   };
   return (
-    <>
+    <div className="flex">
       <label className={classLabel} htmlFor={id}>
         {label}
       </label>
       <div
         className={`flex items-center rounded-lg bg-slate-100 p-1 ring-4 ring-inset transition-shadow ${width} ${
           isFocused ? 'ring-teal-400' : 'ring-transparent'
-        }`}
+        }
+         ${isInvalid ? 'ring-red-500' : ''}
+        `}
       >
         <input
           ref={ref}
@@ -56,6 +72,7 @@ export const FormInput = forwardRef(function FormInput(
           name={name}
         />
       </div>
-    </>
+      <p className="text-xs">{isInvalid ? errors : null}</p>
+    </div>
   );
 });

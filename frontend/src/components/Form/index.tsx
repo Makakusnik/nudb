@@ -15,7 +15,7 @@ export const FormColumn = ({
 }: FormLayoutProps) => {
   return (
     <div
-      className={`${width} flex flex-col gap-4 ${justifyContent ? justifyContent : ''} ${alignItems ? alignItems : ''}`}
+      className={`${width} flex flex-col gap-2 ${justifyContent ? justifyContent : ''} ${alignItems ? alignItems : ''}`}
     >
       {children}
     </div>

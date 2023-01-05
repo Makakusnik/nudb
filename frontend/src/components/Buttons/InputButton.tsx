@@ -59,7 +59,7 @@ export const AddInputButton = ({ children }: ChildrenProps) => {
           onClick={handleClick}
         >
           <AddSymbol size={16} className="mr-2" />
-          {isInputState ? 'Confirm' : 'Add Food To Plan'}
+          {isInputState ? 'Confirm' : children}
         </button>
       </div>
     </form>

@@ -6,7 +6,7 @@ import { IconButton } from '@components/Buttons/IconButton';
 import { Header } from '@components/Header';
 import { Main } from '@components/Main';
 import { Modal } from '@components/Modal';
-import { AddProductModal } from '@components/Modal/Data';
+import { AddProductModal } from '@components/Modal/Data/addProductModal';
 import { NavigationBar } from '@components/NavigationBar';
 import { Table } from '@components/TableComponents';
 
@@ -18,8 +18,6 @@ const Home: NextPage = () => {
   const { setModalContent, setModalState } = useContext(ModalContext);
 
   const handleClick = () => {
-    console.log('yeah');
-
     setModalContent(<AddProductModal />);
     setModalState(true);
   };
