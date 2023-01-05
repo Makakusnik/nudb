@@ -2,7 +2,7 @@ import { forwardRef, useState } from 'react';
 import type { WidthFraction } from '@type/Styles';
 import type { HTMLInputTypeAttribute, Ref } from 'react';
 
-import type { InputProps } from '../BaseInput';
+import type { NativeInputProps } from '../BaseInput';
 
 type FormInputProps = {
   label: string;
@@ -15,7 +15,7 @@ type FormInputProps = {
   classInput?: string;
   isInvalid?: boolean;
   errors?: string;
-} & InputProps;
+} & NativeInputProps;
 forwardRef;
 
 // TODO Sprav addony na input (left, right) errory taktiez.
@@ -61,7 +61,6 @@ export const VerticalInput = forwardRef(function FormInput(
         `}
       >
         <input
-          ref={ref}
           className={`w-full rounded-lg bg-white p-1 ${classInput || ''}`}
           {...other}
           onFocus={(e) => {

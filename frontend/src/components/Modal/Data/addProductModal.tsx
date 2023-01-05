@@ -103,7 +103,6 @@ export const AddProductModal = () => {
                 <HorizontalInput
                   classLabel="flex items-center"
                   id={addProductFields.energy.fieldName}
-                  isInvalid={Object.hasOwn(errors, addProductFields.energy.fieldName)}
                   errors={errors[addProductFields.energy.fieldName]?.message}
                   label={`${addProductFields.energy.labelName}:`}
                   type="numeric"
@@ -151,7 +150,7 @@ export const AddProductModal = () => {
                       id={addProductFields.saturatedFats.fieldName}
                       isInvalid={Object.hasOwn(errors, addProductFields.saturatedFats.fieldName)}
                       errors={errors[addProductFields.saturatedFats.fieldName]?.message}
-                      label={`${addProductFields.saturatedFats.labelName}:`}
+                      label={<abbr title="Saturated Fatty Acids">{addProductFields.saturatedFats.labelName}:</abbr>}
                       type="numeric"
                       {...register(addProductFields.saturatedFats.fieldName)}
                     />
@@ -182,7 +181,11 @@ export const AddProductModal = () => {
                       id={addProductFields.monoUnsaturatedFats.fieldName}
                       isInvalid={Object.hasOwn(errors, addProductFields.monoUnsaturatedFats.fieldName)}
                       errors={errors[addProductFields.monoUnsaturatedFats.fieldName]?.message}
-                      label={`${addProductFields.monoUnsaturatedFats.labelName}:`}
+                      label={
+                        <abbr title="Mono Unsaturated Fatty Acids">
+                          {addProductFields.monoUnsaturatedFats.labelName}:
+                        </abbr>
+                      }
                       type="numeric"
                       {...register(addProductFields.monoUnsaturatedFats.fieldName)}
                     />
@@ -236,10 +239,10 @@ export const AddProductModal = () => {
               </FormRow>
               {/* Salt */}
               <FormRow justifyContent="justify-center">
-                <FormColumn width="w-1/3">
-                  <FormRow justifyContent="justify-between">
+                <FormColumn alignItems="items-center">
+                  <FormRow width="w-1/2">
                     <HorizontalInput
-                      width="w-full"
+                      width="w-1/2"
                       classLabel="flex items-center"
                       id={addProductFields.salt.fieldName}
                       isInvalid={Object.hasOwn(errors, addProductFields.salt.fieldName)}
