@@ -138,7 +138,7 @@ body {
 .tooltip-top:after {
   --translate-y: calc(-100% - var(--arrow-size));
   left: 50%;
-  top: -25%;
+  top: -1rem;
   transform: translateY(var(--translate-y, 0)) translateX(-50%) scale(var(--scale));
   transform-origin: bottom center;
 }
@@ -146,7 +146,7 @@ body {
 .tooltip-left:after,
 .tooltip-left:before {
   --translate-x: calc(-100% - var(--arrow-size));
-  left: -25%;
+  left: -1rem;
   top: 50%;
   transform-origin: center right;
   transform: translateY(-50%) translateX(var(--translate-x, 0)) scale(var(--scale));
@@ -155,7 +155,7 @@ body {
 .tooltip-right:before,
 .tooltip-right:after {
   --translate-x: calc(100% + var(--arrow-size));
-  right: -25%;
+  right: -1rem;
   top: 50%;
   transform-origin: center left;
   transform: translateY(-50%) translateX(var(--translate-x, 0)) scale(var(--scale));
@@ -165,7 +165,7 @@ body {
 .tooltip-bottom:after {
   --translate-y: calc(100% + var(--arrow-size));
   left: 50%;
-  bottom: -25%;
+  bottom: -1rem;
   transform-origin: top center;
   transform: translateY(var(--translate-y, 0)) translateX(-50%) scale(var(--scale));
 }
