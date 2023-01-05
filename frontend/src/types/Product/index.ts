@@ -1,16 +1,7 @@
-export interface Product {
-  id: string;
-  name: string;
-  description?: string;
-  brand?: string;
-  energy: number;
-  fats: number;
-  saturatedFats: number;
-  monoUnsaturatedFats: number;
-  polyUnsaturatedFats: number;
-  proteins: number;
-  carbohydrates: number;
-  sugar: number;
-  fiber: number;
-  salt: number;
-}
+import type { z } from 'zod';
+
+import type { addProductSchema } from '@lib/validations/addProduct';
+
+export type ProductType = z.infer<typeof addProductSchema>;
+
+export type ProductTypeKeys = keyof ProductType;

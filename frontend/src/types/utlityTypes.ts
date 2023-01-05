@@ -13,3 +13,10 @@ type SelectedNever<Base, T extends string | number | symbol> = {
 export type Dependant<BaseAttributes, DependantAttributes extends keyof BaseAttributes> =
   | SelectedOptional<BaseAttributes, DependantAttributes>
   | SelectedNever<BaseAttributes, DependantAttributes>;
+
+export type FieldData<FieldNames extends string | number | symbol> = {
+  [Key in FieldNames]: {
+    labelName: string;
+    fieldName: Key;
+  };
+};
