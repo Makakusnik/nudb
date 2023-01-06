@@ -44,7 +44,7 @@ export const AddProductModal = () => {
     shouldUseNativeValidation: true,
   });
 
-  const clickHandler = () => {
+  const buttonClickHandler = () => {
     handleSubmit(
       (data) => {
         console.log('Data: ', data);
@@ -98,7 +98,6 @@ export const AddProductModal = () => {
             <FormColumn alignItems="items-center" width="w-4/6">
               <FormRow>
                 <HorizontalInput
-                  classLabel="flex items-center"
                   id={addProductFields.energy.fieldName}
                   errors={errors[addProductFields.energy.fieldName]?.message}
                   label={`${addProductFields.energy.labelName}:`}
@@ -112,7 +111,6 @@ export const AddProductModal = () => {
                   <FormRow justifyContent="justify-between">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="flex items-center"
                       id={addProductFields.fats.fieldName}
                       errors={errors[addProductFields.fats.fieldName]?.message}
                       label={`${addProductFields.fats.labelName}:`}
@@ -125,7 +123,6 @@ export const AddProductModal = () => {
                   <FormRow justifyContent="justify-between">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="flex items-center"
                       id={addProductFields.proteins.fieldName}
                       errors={errors[addProductFields.proteins.fieldName]?.message}
                       label={`${addProductFields.proteins.labelName}:`}
@@ -141,7 +138,6 @@ export const AddProductModal = () => {
                   <FormRow justifyContent="justify-between">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="pl-4 flex items-center"
                       id={addProductFields.saturatedFats.fieldName}
                       errors={errors[addProductFields.saturatedFats.fieldName]?.message}
                       label={<abbr title="Saturated Fatty Acids">{addProductFields.saturatedFats.labelName}:</abbr>}
@@ -154,7 +150,6 @@ export const AddProductModal = () => {
                   <FormRow justifyContent="justify-between">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="flex items-center"
                       id={addProductFields.carbohydrates.fieldName}
                       errors={errors[addProductFields.carbohydrates.fieldName]?.message}
                       label={`${addProductFields.carbohydrates.labelName}:`}
@@ -170,7 +165,6 @@ export const AddProductModal = () => {
                   <FormRow justifyContent="justify-between">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="pl-4 flex items-center"
                       id={addProductFields.monoUnsaturatedFats.fieldName}
                       errors={errors[addProductFields.monoUnsaturatedFats.fieldName]?.message}
                       label={
@@ -187,7 +181,6 @@ export const AddProductModal = () => {
                   <FormRow justifyContent="justify-between">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="pl-4 flex items-center"
                       id={addProductFields.sugar.fieldName}
                       errors={errors[addProductFields.sugar.fieldName]?.message}
                       label={`${addProductFields.sugar.labelName}:`}
@@ -203,7 +196,6 @@ export const AddProductModal = () => {
                   <FormRow justifyContent="justify-between">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="pl-4 flex items-center"
                       id={addProductFields.polyUnsaturatedFats.fieldName}
                       errors={errors[addProductFields.polyUnsaturatedFats.fieldName]?.message}
                       label={`${addProductFields.polyUnsaturatedFats.labelName}:`}
@@ -216,7 +208,6 @@ export const AddProductModal = () => {
                   <FormRow justifyContent="justify-between">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="pl-4 flex items-center"
                       id={addProductFields.fiber.fieldName}
                       errors={errors[addProductFields.fiber.fieldName]?.message}
                       label={`${addProductFields.fiber.labelName}:`}
@@ -232,7 +223,6 @@ export const AddProductModal = () => {
                   <FormRow width="w-1/2">
                     <HorizontalInput
                       width="w-1/2"
-                      classLabel="flex items-center"
                       id={addProductFields.salt.fieldName}
                       errors={errors[addProductFields.salt.fieldName]?.message}
                       label={`${addProductFields.salt.labelName}:`}
@@ -247,7 +237,7 @@ export const AddProductModal = () => {
         </form>
       </Dialog.Description>
       <div className="mt-4 flex w-full justify-end">
-        <IconTextButton onClick={clickHandler} icon={AddSymbol}>
+        <IconTextButton onClick={buttonClickHandler} icon={AddSymbol}>
           Add Food
         </IconTextButton>
       </div>

@@ -1,5 +1,7 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef } from 'react';
 import type { DetailedHTMLProps, InputHTMLAttributes, Ref } from 'react';
+
+import { TextArea } from '../TextArea';
 
 type TextAreaProps = DetailedHTMLProps<InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
 
@@ -8,52 +10,28 @@ interface FormTextAreaProps extends TextAreaProps {
   id: string;
   name: string;
   placeholder?: string;
-  classLabel?: string;
-  classInput?: string;
   isInvalid?: boolean;
   errors?: string;
 }
 
 export const FormTextArea = forwardRef(function FormTextArea(
-  { label, name, id, placeholder, classInput, classLabel, isInvalid, errors, ...other }: FormTextAreaProps,
+  { width, errors, label, ...props }: FormTextAreaProps,
   ref: Ref<HTMLTextAreaElement>,
 ) {
-  const [isFocused, setFocused] = useState<boolean>(false);
-
-  const handleFocus = () => {
-    setFocused(true);
-  };
-  const handleBlur = () => {
-    setFocused(false);
-  };
   return (
     <>
-      <label className={`${classLabel}`} htmlFor={id}>
+      <label className={'flex items-center'} htmlFor={props.id}>
         {label}
       </label>
-      <div
-        className={`flex items-center rounded-lg bg-slate-100 p-1 ring-4 ring-inset transition-shadow  ${
-          isFocused ? 'ring-teal-400' : 'ring-transparent'
-        }`}
-      >
-        <textarea
-          ref={ref}
-          className={`w-full rounded-lg bg-white p-1 ${classInput}`}
-          {...other}
-          onFocus={(e) => {
-            handleFocus();
-            other.onFocus && other.onFocus(e);
-          }}
-          onBlur={(e) => {
-            handleBlur();
-            other.onBlur && other.onBlur(e);
-          }}
-          id={id}
-          placeholder={placeholder}
-          name={name}
-        />
-      </div>
-      {isInvalid ? errors : null}
+      <TextArea
+        {...props}
+        className={`m-1 flex min-h-[2rem] items-center self-end rounded-lg 
+          p-1 ring-4 ring-slate-100 transition-shadow invalid:ring-red-200 focus:ring-teal-400 focus:invalid:ring-red-400 ${
+            width ? width : 'w-full'
+          }`}
+        textAreaRef={ref}
+      />
+      {errors ? <em className="mt-1 mb-2 text-xs font-medium not-italic text-red-500">{errors}</em> : null}
     </>
   );
 });
