@@ -6,6 +6,7 @@ import { AddInputButton } from '@components/Buttons';
 import { NutritionTable } from '@components/NutritionalTable';
 
 import { ModalContext } from '@context/ModalContext';
+import { ConfirmationContext } from '@context/NewModalContext';
 
 import { DialogTopBar } from '..';
 
@@ -17,6 +18,43 @@ export const DefaultModal = () => {
       <Dialog.Description>This modal is default for unhandled modal content.</Dialog.Description>
       <p>Please provide proper modal content data.</p>
       <button onClick={() => setModalState && setModalState(false)}>Cancel</button>
+    </Dialog.Panel>
+  );
+};
+
+export const DefaultConfirmation = () => {
+  const { answerNegatively, answerPositively } = useContext(ConfirmationContext);
+
+  return (
+    <Dialog.Panel className={'w-full max-w-sm rounded bg-white'}>
+      <DialogTopBar>Are you sure?</DialogTopBar>
+      <Dialog.Description>This modal is default for unhandled confirmation content.</Dialog.Description>
+      <button onClick={() => answerPositively()}>Continue</button>
+      <button onClick={() => answerNegatively()}>Close</button>
+    </Dialog.Panel>
+  );
+};
+
+interface ConfirmationDialogProps {
+  title: string;
+  details: string;
+  positiveButtonTitle: string;
+  negativeButtonTitle: string;
+}
+
+export const ConfirmationDialog = ({
+  title,
+  details,
+  positiveButtonTitle,
+  negativeButtonTitle,
+}: ConfirmationDialogProps) => {
+  const { answerNegatively, answerPositively } = useContext(ConfirmationContext);
+  return (
+    <Dialog.Panel className={'w-full max-w-sm rounded bg-white'}>
+      <DialogTopBar hasCloseButton={false}>{title}</DialogTopBar>
+      <Dialog.Description>{details}</Dialog.Description>
+      <button onClick={() => answerNegatively()}>{negativeButtonTitle}</button>
+      <button onClick={() => answerPositively()}>{positiveButtonTitle}</button>
     </Dialog.Panel>
   );
 };
