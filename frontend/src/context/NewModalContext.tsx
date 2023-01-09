@@ -4,6 +4,9 @@ import type { ReactNode } from 'react';
 
 import { useDeferredPromise } from '@hooks/useDeferredPromise';
 
+// TODO Split modal and confirmation context,
+// TODO Add Neutral choice to confirm context
+
 interface NewModalContextProps {
   isModalOpen: boolean;
   ModalContent: ReactNode | null;
