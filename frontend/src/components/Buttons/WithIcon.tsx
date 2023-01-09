@@ -1,10 +1,11 @@
 import { forwardRef } from 'react';
 import { disabledStyle } from '@styles/shared';
 import type { ChildrenProps } from '@type/index';
+import type { ButtonAttributes } from '@type/Native Props';
 import type { ColorType, Position } from '@type/Styles';
 import type { IconSize } from '@type/Styles/iconVariants';
 import type { Dependant } from '@type/utlityTypes';
-import type { ButtonHTMLAttributes, DetailedHTMLProps, Ref } from 'react';
+import type { Ref } from 'react';
 import type { IconType } from 'react-icons';
 import { BsQuestion } from 'react-icons/bs';
 
@@ -15,7 +16,7 @@ import { Button } from './BaseButton';
 
 const ButtonIconBaseClasses = 'flex h-fit w-fit items-center rounded-md p-2 transition-all duration-300';
 
-interface IconButtonPropsBase extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+interface CustomIconButtonProps extends ButtonAttributes {
   icon: IconType;
   iconSize?: IconSize;
   colorType?: ColorType;
@@ -23,7 +24,7 @@ interface IconButtonPropsBase extends DetailedHTMLProps<ButtonHTMLAttributes<HTM
   tooltipPosition?: Position;
 }
 
-type IconButtonProps = Dependant<IconButtonPropsBase, 'tooltip' | 'tooltipPosition'>;
+type IconButtonProps = Dependant<CustomIconButtonProps, 'tooltip' | 'tooltipPosition'>;
 
 export const IconButton = ({
   icon,
@@ -36,10 +37,9 @@ export const IconButton = ({
   const Icon = icon;
   const focusClass = getFocusClasses(colorType);
   const colorClass = getColorClasses(colorType);
-  const tooltipClass = tooltipPosition ? getTooltipPosition(tooltipPosition) : '';
+  const tooltipClass = getTooltipPosition(tooltipPosition);
   return (
     <Button
-      type={'button'}
       data-tooltip={tooltip}
       className={`${ButtonIconBaseClasses} ${focusClass} ${colorClass} ${disabledStyle} ${tooltipClass}`}
       {...props}
@@ -64,7 +64,7 @@ export const IconTextButton = forwardRef(function IconTextButton(
   const Icon = icon;
   const focusClass = getFocusClasses(colorType);
   const colorClass = getColorClasses(colorType);
-  const tooltipClass = tooltipPosition ? getTooltipPosition(tooltipPosition) : '';
+  const tooltipClass = getTooltipPosition(tooltipPosition);
   return (
     <Button
       ref={ref}

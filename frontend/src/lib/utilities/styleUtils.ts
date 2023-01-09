@@ -65,7 +65,8 @@ export function getColorClasses(type: ColorType) {
   }
 }
 
-export function getTooltipPosition(tooltipPosition: Position) {
+export function getTooltipPosition(tooltipPosition: Position | undefined) {
+  if (!tooltipPosition) return '';
   switch (tooltipPosition) {
     case 'bottom':
       return 'tooltip-bottom';
