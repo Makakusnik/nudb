@@ -4,11 +4,11 @@ import type { ProductType } from '@type/Product';
 import { useForm } from 'react-hook-form';
 import { addProductFields } from 'src/constants/fieldNames';
 
-import { IconTextButton } from '@components/Buttons/IconButton';
+import { IconTextButton } from '@components/Buttons';
 import { FormColumn, FormRow } from '@components/Form';
 import { FormTextArea, HorizontalInput, VerticalInput } from '@components/Input';
 
-import { AddSymbol } from '@assets/icons';
+import { AddIcon } from '@assets/icons';
 import { addProductSchema } from '@lib/validations/addProduct';
 
 import { DialogTopBar } from '..';
@@ -58,7 +58,7 @@ export const AddProductModal = () => {
   return (
     <Dialog.Panel className={'w-full max-w-2xl rounded-md bg-white p-6'}>
       <DialogTopBar>Add Product</DialogTopBar>
-      <Dialog.Description className="mt-4 flex" as="div">
+      <Dialog.Description className="flex" as="div">
         {
           // TODO poriadne sprav submitovanie
         }
@@ -237,7 +237,7 @@ export const AddProductModal = () => {
         </form>
       </Dialog.Description>
       <div className="mt-4 flex w-full justify-end">
-        <IconTextButton onClick={buttonClickHandler} icon={AddSymbol}>
+        <IconTextButton onClick={buttonClickHandler} icon={AddIcon}>
           Add Food
         </IconTextButton>
       </div>
