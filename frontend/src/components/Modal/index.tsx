@@ -2,11 +2,11 @@ import { useContext } from 'react';
 import { Dialog } from '@headlessui/react';
 import type { ChildrenProps } from '@type/index';
 
-import { IconButton } from '@components/Buttons/IconButton';
+import { IconButton } from '@components/Buttons';
 
 import { ConfirmationContext, NewModalContext } from '@context/NewModalContext';
 
-import { CloseSymbol } from '@assets/icons';
+import { CloseIcon } from '@assets/icons';
 
 import { DefaultConfirmation, DefaultModal } from './Data';
 
@@ -45,9 +45,9 @@ export const DialogTopBar = ({ children, onClose, hasCloseButton = true }: Dialo
     close();
   };
   return (
-    <Dialog.Title className={'flex justify-between text-2xl font-medium'}>
+    <Dialog.Title className={'mb-4 flex justify-between text-2xl font-medium'}>
       {children}
-      {hasCloseButton ? <IconButton onClick={handleClose} icon={CloseSymbol} colorType="close"></IconButton> : null}
+      {hasCloseButton ? <IconButton onClick={handleClose} icon={CloseIcon} colorType="close"></IconButton> : null}
     </Dialog.Title>
   );
 };

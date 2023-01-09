@@ -1,7 +1,8 @@
-import { AiFillWarning } from 'react-icons/ai';
-import { BsPlusLg } from 'react-icons/bs';
-import { GrClose } from 'react-icons/gr';
+import { BsQuestion } from 'react-icons/bs';
+import { MdAdd, MdOutlineClose, MdOutlineDone, MdWarning } from 'react-icons/md';
 
-export const AddSymbol = BsPlusLg;
-export const CloseSymbol = GrClose;
-export const WarningSymbol = AiFillWarning;
+export const AddIcon = MdAdd;
+export const CloseIcon = MdOutlineClose;
+export const WarningIcon = MdWarning;
+export const UnknownIcon = BsQuestion;
+export const TickIcon = MdOutlineDone;
