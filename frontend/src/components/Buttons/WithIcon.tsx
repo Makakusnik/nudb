@@ -11,6 +11,8 @@ import { BsQuestion } from 'react-icons/bs';
 import { UnknownIcon } from '@assets/icons';
 import { getColorClasses, getFocusClasses, getTooltipPosition } from '@lib/utilities/styleUtils';
 
+import { Button } from './BaseButton';
+
 const ButtonIconBaseClasses = 'flex h-fit w-fit items-center rounded-md p-2 transition-all duration-300';
 
 interface IconButtonPropsBase extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
@@ -36,14 +38,14 @@ export const IconButton = ({
   const colorClass = getColorClasses(colorType);
   const tooltipClass = tooltipPosition ? getTooltipPosition(tooltipPosition) : '';
   return (
-    <button
+    <Button
       type={'button'}
       data-tooltip={tooltip}
       className={`${ButtonIconBaseClasses} ${focusClass} ${colorClass} ${disabledStyle} ${tooltipClass}`}
       {...props}
     >
       {Icon ? <Icon size={iconSize} /> : <BsQuestion size={iconSize} />}
-    </button>
+    </Button>
   );
 };
 
@@ -64,15 +66,15 @@ export const IconTextButton = forwardRef(function IconTextButton(
   const colorClass = getColorClasses(colorType);
   const tooltipClass = tooltipPosition ? getTooltipPosition(tooltipPosition) : '';
   return (
-    <button
+    <Button
       ref={ref}
       onClick={(e) => onClick && onClick(e)}
       type={'button'}
       data-tooltip={tooltip}
-      className={`${ButtonIconBaseClasses} ${focusClass} ${colorClass} ${disabledStyle} ${tooltipClass} px-3`}
+      className={`${ButtonIconBaseClasses} ${focusClass} ${colorClass} ${disabledStyle} ${tooltipClass} px-2`}
     >
-      {Icon ? <Icon className="mr-2" size={iconSize} /> : <UnknownIcon size={iconSize} />}
+      {Icon ? <Icon className="mr-1" size={iconSize} /> : <UnknownIcon size={iconSize} />}
       {children}
-    </button>
+    </Button>
   );
 });
