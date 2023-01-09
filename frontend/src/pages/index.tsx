@@ -2,23 +2,32 @@ import { useContext } from 'react';
 import { type NextPage } from 'next';
 import Head from 'next/head';
 
-import { IconButton } from '@components/Buttons/IconButton';
+import { IconButton } from '@components/Buttons';
 import { Header } from '@components/Header';
 import { Main } from '@components/Main';
 import { Confirmation, Modal } from '@components/Modal';
+import { ConfirmationDialog } from '@components/Modal/Data';
 import { AddProductModal } from '@components/Modal/Data/addProductModal';
 import { NavigationBar } from '@components/NavigationBar';
 import { Table } from '@components/TableComponents';
 
 import { NewModalContext } from '@context/NewModalContext';
 
-import { AddSymbol, WarningSymbol } from '@assets/icons';
+import { AddIcon, WarningIcon } from '@assets/icons';
 
 const Home: NextPage = () => {
   const { open } = useContext(NewModalContext);
 
   const handleClick = () => {
-    open(<AddProductModal />);
+    open(
+      <AddProductModal />,
+      <ConfirmationDialog
+        title="Discard changes?"
+        description="Are you sure you want to discard changes?"
+        negativeButtonTitle="Discard"
+        positiveButtonTitle="Continue"
+      />,
+    );
   };
 
   return (
@@ -37,11 +46,11 @@ const Home: NextPage = () => {
           <IconButton
             onClick={handleClick}
             colorType="green"
-            icon={AddSymbol}
+            icon={AddIcon}
             tooltip={'Add product to database'}
             tooltipPosition="top"
           />
-          <IconButton colorType="yellow" icon={WarningSymbol} />
+          <IconButton colorType="yellow" icon={WarningIcon} />
         </div>
         <div className="overflow-y-scroll bg-white lg:rounded-lg">
           <Table />

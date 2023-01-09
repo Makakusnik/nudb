@@ -1,12 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import type { ProductType } from '@type/Product';
 
-import { AddInputButton } from '@components/Buttons';
+import { AddInputButton, IconTextButton } from '@components/Buttons';
+import { Button } from '@components/Buttons/BaseButton';
 import { NutritionTable } from '@components/NutritionalTable';
 
 import { ModalContext } from '@context/ModalContext';
 import { ConfirmationContext } from '@context/NewModalContext';
+
+import { CloseIcon, TickIcon } from '@assets/icons';
 
 import { DialogTopBar } from '..';
 
@@ -27,34 +30,84 @@ export const DefaultConfirmation = () => {
 
   return (
     <Dialog.Panel className={'w-full max-w-sm rounded bg-white'}>
-      <DialogTopBar>Are you sure?</DialogTopBar>
+      <DialogTopBar>Unhandled confirmation content</DialogTopBar>
       <Dialog.Description>This modal is default for unhandled confirmation content.</Dialog.Description>
-      <button onClick={() => answerPositively()}>Continue</button>
-      <button onClick={() => answerNegatively()}>Close</button>
+      <div className="flex">
+        <button onClick={() => answerPositively()}>Positive</button>
+        <button onClick={() => answerNegatively()}>Negative</button>
+      </div>
     </Dialog.Panel>
   );
 };
 
 interface ConfirmationDialogProps {
   title: string;
-  details: string;
-  positiveButtonTitle: string;
-  negativeButtonTitle: string;
+  description: string;
+  positiveButtonTitle?: string;
+  negativeButtonTitle?: string;
+  neutralButtonTitle?: string;
+  positiveHandler?: () => void;
+  negativeHandler?: () => void;
+  neutralHandler?: () => void;
 }
 
 export const ConfirmationDialog = ({
   title,
-  details,
+  description,
   positiveButtonTitle,
   negativeButtonTitle,
+  neutralButtonTitle,
+  positiveHandler,
+  negativeHandler,
+  neutralHandler,
 }: ConfirmationDialogProps) => {
   const { answerNegatively, answerPositively } = useContext(ConfirmationContext);
+  const positiveRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    positiveRef && positiveRef.current?.focus();
+  }, [positiveRef]);
   return (
-    <Dialog.Panel className={'w-full max-w-sm rounded bg-white'}>
+    <Dialog.Panel className={'w-full max-w-fit rounded bg-white p-6'}>
       <DialogTopBar hasCloseButton={false}>{title}</DialogTopBar>
-      <Dialog.Description>{details}</Dialog.Description>
-      <button onClick={() => answerNegatively()}>{negativeButtonTitle}</button>
-      <button onClick={() => answerPositively()}>{positiveButtonTitle}</button>
+      <Dialog.Description className="mb-4">{description}</Dialog.Description>
+      <div className="flex justify-end gap-x-2">
+        {negativeButtonTitle && (
+          <IconTextButton
+            colorType="red"
+            icon={CloseIcon}
+            onClick={() => {
+              negativeHandler && negativeHandler();
+              answerNegatively();
+            }}
+          >
+            {negativeButtonTitle}
+          </IconTextButton>
+        )}
+        {positiveButtonTitle && (
+          <IconTextButton
+            colorType="green"
+            ref={positiveRef}
+            icon={TickIcon}
+            onClick={() => {
+              positiveHandler && positiveHandler();
+              answerPositively();
+            }}
+          >
+            {positiveButtonTitle}
+          </IconTextButton>
+        )}
+        {neutralButtonTitle && (
+          <Button
+            colorType="neutral"
+            onClick={() => {
+              neutralHandler && neutralHandler();
+              answerPositively();
+            }}
+          >
+            {neutralButtonTitle}
+          </Button>
+        )}
+      </div>
     </Dialog.Panel>
   );
 };
