@@ -9,7 +9,7 @@ type DeferredPromise<DeferType> = {
 export function useDeferredPromise<DeferType>() {
   const deferRef = useRef<DeferredPromise<DeferType> | null>(null);
 
-  const intializeDefer = () => {
+  const createNewPromise = () => {
     const deferred = {} as DeferredPromise<DeferType>;
 
     const promise = new Promise<DeferType>((resolve, reject) => {
@@ -22,5 +22,10 @@ export function useDeferredPromise<DeferType>() {
     return deferRef.current;
   };
 
-  return { intializeDefer, deferRef: deferRef.current };
+  return {
+    createNewPromise,
+    resolve: deferRef.current?.resolve,
+    reject: deferRef.current?.reject,
+    promise: deferRef.current?.promise,
+  };
 }
