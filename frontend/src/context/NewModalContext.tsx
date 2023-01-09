@@ -8,7 +8,7 @@ interface NewModalContextProps {
   isModalOpen: boolean;
   ModalContent: ReactNode | null;
   close: () => void;
-  open: (component: ReactNode) => void;
+  open: (modal: ReactNode, confirmationModal?: ReactNode) => void;
 }
 
 interface ConfirmationProps {
@@ -17,8 +17,6 @@ interface ConfirmationProps {
   answerPositively: () => void;
   answerNegatively: () => void;
   closeConfirmation: () => void;
-  openConfirmation: () => void;
-  setConfirmationContent: (component: ReactNode) => void;
 }
 
 export const NewModalContext = createContext<NewModalContextProps>({
@@ -30,70 +28,59 @@ export const NewModalContext = createContext<NewModalContextProps>({
 
 export const ConfirmationContext = createContext<ConfirmationProps>({
   closeConfirmation: () => null,
-  openConfirmation: () => null,
   answerPositively: () => null,
   answerNegatively: () => null,
-  setConfirmationContent: () => null,
   ConfirmationContent: null,
   isConfirmationOpen: false,
 });
 
 export const NewModalContextProvider = ({ children }: ChildrenProps) => {
   const [isModalOpen, _setModalState] = useState<boolean>(false);
+  const [hasConfirmation, setHasConfirmation] = useState<boolean>(false);
   const [ModalContent, _setModalContent] = useState<ReactNode>();
 
   const [ConfirmationContent, _setConfirmationContent] = useState<ReactNode>();
   const [isConfirmationOpen, _setConfirmationState] = useState<boolean>(false);
 
-  const { intializeDefer, deferRef } = useDeferredPromise<boolean>();
+  const { createNewPromise, resolve, promise } = useDeferredPromise<boolean>();
 
   const initializeConfirmation = () => {
-    intializeDefer();
+    createNewPromise();
   };
-
   const answerPositively = () => {
-    deferRef?.resolve(true);
+    resolve?.(true);
   };
-
   const answerNegatively = () => {
-    deferRef?.resolve(false);
+    resolve?.(false);
   };
-
   function closeConfirmation() {
     _setConfirmationState(false);
   }
-
   function openConfirmation() {
     _setConfirmationState(true);
   }
 
   async function close() {
-    openConfirmation();
-
-    if (deferRef?.promise) {
-      await deferRef?.promise.then((value) => {
-        if (!value) {
-          closeConfirmation();
-          _setModalState(false);
-        } else {
-          closeConfirmation();
-          intializeDefer();
-        }
+    if (hasConfirmation && promise) {
+      openConfirmation();
+      await promise.then((shouldContinue) => {
+        closeConfirmation();
+        shouldContinue ? createNewPromise() : _setModalState(false);
       });
-    } else {
-      _setModalState(false);
+      return;
     }
+    _setModalState(false);
   }
 
-  function open(value: ReactNode) {
-    _setModalContent(value);
+  function open(modal: ReactNode, confirmationModal?: ReactNode) {
+    if (confirmationModal) {
+      setHasConfirmation(true);
+      _setConfirmationContent(confirmationModal);
+      initializeConfirmation();
+    }
+    _setModalContent(modal);
     _setModalState(true);
-    initializeConfirmation();
   }
-
-  const setConfirmationContent = (value: ReactNode) => {
-    _setConfirmationContent(value);
-  };
 
   return (
     <NewModalContext.Provider
@@ -111,8 +98,6 @@ export const NewModalContextProvider = ({ children }: ChildrenProps) => {
           answerPositively,
           answerNegatively,
           closeConfirmation,
-          openConfirmation,
-          setConfirmationContent,
         }}
       >
         {children}
