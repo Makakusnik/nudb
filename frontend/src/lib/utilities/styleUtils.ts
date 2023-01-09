@@ -2,6 +2,7 @@ import {
   colorsBlue,
   colorsClose,
   colorsGreen,
+  colorsNeutral,
   colorsRed,
   colorsTeal,
   colorsTransparent,
@@ -9,6 +10,7 @@ import {
   focusBlue,
   focusClose,
   focusGreen,
+  focusNeutral,
   focusRed,
   focusTeal,
   focusYellow,
@@ -33,6 +35,8 @@ export function getFocusClasses(type: ColorType) {
       return focusTeal;
     case 'close':
       return focusClose;
+    case 'neutral':
+      return focusNeutral;
     default:
       return exhaustiveCheck(type);
   }
@@ -54,6 +58,8 @@ export function getColorClasses(type: ColorType) {
       return colorsTransparent;
     case 'close':
       return colorsClose;
+    case 'neutral':
+      return colorsNeutral;
     default:
       return exhaustiveCheck(type);
   }

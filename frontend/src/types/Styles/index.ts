@@ -1,4 +1,4 @@
-export type ColorType = 'transparent' | 'green' | 'blue' | 'yellow' | 'red' | 'teal' | 'close';
+export type ColorType = 'neutral' | 'transparent' | 'green' | 'blue' | 'yellow' | 'red' | 'teal' | 'close';
 
 export type Position = 'top' | 'left' | 'bottom' | 'right';
 
