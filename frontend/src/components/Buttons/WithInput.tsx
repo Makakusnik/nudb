@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { ChildrenProps } from '@type/index';
 import type { FormEvent } from 'react';
 
-import { AddSymbol } from '@assets/icons';
+import { AddIcon } from '@assets/icons';
 
 export const AddInputButton = ({ children }: ChildrenProps) => {
   const [isInputState, setInputState] = useState<boolean>(false);
@@ -58,7 +58,7 @@ export const AddInputButton = ({ children }: ChildrenProps) => {
           }`}
           onClick={handleClick}
         >
-          <AddSymbol size={16} className="mr-2" />
+          <AddIcon size={16} className="mr-2" />
           {isInputState ? 'Confirm' : children}
         </button>
       </div>
